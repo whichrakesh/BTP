@@ -1,0 +1,60 @@
+1971 An Empirical Study of FORTRAN Programs - Donald Knuth
+		--Static and Dynamic Analysis of FORTRAN Programs
+		--Lockheed and stanford programs used for study
+		--Level of nesting of DO loops
+		--Number of operations in Expressions
+		--Dynamic analysis of Statements
+		--Improvement in program time after 5-level Optimization
+	--Not much useful for our work
+
+#############################################################################################################################
+
+1991 An Empirical Study of Fortran Programs for Parallelizing Compilers - ZHIYU SHEN, ZHIYUAN LI AND PEN-CHUNG YEW
+		--This paper identifies three factors that could potentially weaken theresults of current algorithms: 
+				1) symbolic terms with unknown values, 
+				2) coupled subscripts, 
+				3) nonzero and nonunity coefficients of loop indices.
+		--Studies on Library packages
+imp		--Linearity of array subscript over dimensions and causes of non-linearity
+		--Usage of User Assertion to linearize array indices
+		--Causes of Non-linearity
+				i. Unknown variable
+				ii. Array subscript present in External function statements
+				iii. Presence of array index which is an array reference
+		--Study on coefficients of loop indices
+		--Improved data dependence test sequence
+			1. Constant test
+			2. Exact test
+			3. Root test based on Banerjee's test
+			4. GCD test
+			5. Theta test based on Banerjee's test considering different direction vectors
+			6. Equality test
+		--Analysis of dependence distance 
+	--Some of the tests can be extended for C like Linearity test etc. to find out if such loops can be parallelized
+
+#############################################################################################################################
+
+2012 19th Working Conference on Reverse Engineering- Empirically Examining the Parallelizability of Open Source Software Systems
+		--Analyses loops of many commonly used open source projects from wide range of aapplications
+		--Using OpenMP to Parallelize a Program
+		--Parallelization inhibitors
+			i. potential data dependency, 
+			ii. function calls with potential side effect, 
+			iii. goto statements, or break statements
+			iv. shared and private data
+		--Approaches not completely accurate but are conservative
+		--function calls present the most serious problems to parallelization.
+		--During the 10-year period only one system, gcc, appears to have a steady and sizable increase in the number of free-loops.
+
+############################################################################################################################
+
+2015 - An empirical examination of the prevalence of inhibitors to the parallelizability of open source software systems
+		-- Addresses these questions
+			R1: What is a typical percentage of for-loops that are free-loops (have no inhibitors)?
+			R2: Which types of inhibitors are the most prevalent?
+			R3: Which types of inhibitors are the most prevalent exclusively?
+				R3a: Data dependencies are a focus in the research literature. How prevalent are they as potential inhibitors?
+				R3b: Complex analysis is needed for function pointers/virtual methods calls. How prevalent are they as potential inhibitors?
+			R4: Over the history of a system, is the presence of inhibitors increasing or decreasing?
+		--Refined analysis of function calls with potential side effects
+		--Analyzed virtual functions and function pointers

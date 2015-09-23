@@ -1,0 +1,148 @@
+Categorization of loops
+	-- For
+	-- While
+	-- Do while
+
+
+For loop
+	-- With or w\o array references 
+		-- Number of array references to each array
+	-- level of nesting 
+	-- Conditional statements inside loop which may affect program execution
+		-- exits(break,return) inside conditionals
+		-- gotos		
+	-- ZIV/ SIV/ MIV
+
+
+Potential vectorisation inhibitors:
+	--Non-linearity of array indices
+		i. Unknown variable
+		ii. Array subscript present in External function statements
+		iii. Presence of array index which is an array reference
+	--Data dependence
+		--GCD test
+		--Banerjee test
+		--exact test
+	--Function calls with potential side effect
+		--function pointers
+		--functions with array indices as parameter
+	
+############################################################################################
+
+for(i = 0; i < m1 * n1; i++) // m1 and n1 can be variable
+{   
+    newMatrixOfDouble[i] = matrixOfDouble[i] * 2; //loop independent dependence
+}
+
+for(i = 0; i < m1 * n1; i++)
+{    
+    matrixOfDouble[i] = multiplybypi(matrixOfDouble[i]); // function call with array as parameter should be considered
+}
+
+for(i = 0; i < gdim->rank; i++)
+{
+    Sci_Plan->gdim.dims[i].n  = gdim->dims[i].n;	//consider object pointers while calculating data dependence
+    Sci_Plan->gdim.dims[i].is = gdim->dims[i].is;
+    Sci_Plan->gdim.dims[i].os = gdim->dims[i].os;
+}
+
+for(i = cur_pos; i < max_pos; i++)
+{
+    cur_line[i] = cur_line[i + 1]; //loop carried dependence
+}
+
+for(i = 1; i < nas2; i++)
+{
+    if (Ar[iA * i] != Ar[iA * (nA - i)]) // consider variables while finding dependence
+    {
+        return 0;
+    }
+}
+
+for(k = 1; k < nAs2; k++)
+{
+    l1 = jA * k + iA ;
+    l2 = jA * (nA - k) + iA * (mA - 1);
+    for(l = 1; l < mA; l++)
+    {
+        if (Ar[l1] != Ar[l2])	// write array indices in terms of the iteration variable 
+        {
+            return 0;
+        }
+        l1 += iA;
+        l2 -= iA;
+    }
+}
+
+for(j = 1; j < nA; j++)
+{
+    dct_scale_1D_array(&Ar[j * jA], NULL, mA, iA, isn, s); // consider passing of array pointers as having potential side effects
+}
+
+for(i = (first_nonsingleton); i < ndimsA; i++)
+{
+    if (dimsA[i] > 1)
+    {
+        gdim.dims[j].n = dimsA[i];
+        gdim.dims[j].is = prd;
+        gdim.dims[j].os = prd;
+        prd *= dimsA[i];	// Consider variables while calculating data dependence
+        j++;
+    }
+}
+
+for(j = (Sel[rank - 1] + 1); j <= ndimsA; j++)
+{
+    pds *= dimsA[j - 1];    // potential inhibitor for parallelization
+}
+
+for(k = 1; k < ndims; k++)
+{        
+    if (Incr[k] != pd)
+    {
+        Dim[nd++] = (int)(Incr[k] / pd);
+        pd = Incr[k];
+    }
+    Dim[nd++] = Dim1[k]; // consider those variables which changes every iteration(nd)
+    pd *= Dim1[k];
+    Sel[k] = nd;
+}
+
+for(i = 0; i < (int)strlen(Str1[j]); i++) // don't take length in loop header as an array read 
+{
+    Str[k+i] = Str1[j][i]; 
+}	
+
+for(j=0; j <= (A->n); j++) (L->first_child)[j] = (L->next_child)[j] = -1;
+
+for(i=0; i<sn_size; i++)
+    xdense[i] = b[ sn_struct[ sn ][ i ] ]; // Array references inside index
+
+for(jp=0; jp<sn_size; jp++) { // Mixture of two dimension and array references inside index
+    for(ip=0; ip<up_size; ip++) {
+      bdense[ip] += xdense[jp] * up_blocks[sn][ up_blocks_ld[sn]*jp + ip];
+    }
+}
+for( i = 0 ; i < nb ; i++ )
+                        residu_with_prec(&A, stk(lxr+i*mx), stk(lbr+i*mb), stk(lrr+i*mb), stk(ln+i));
+
+for( j = 0; j < nb ; j++ )
+{
+    taucs_vec_permute(n, &b[j * mb], &x[j * mb], pC->p);
+    taucs_supernodal_solve_llt(pC->C, v, &x[j * mb]); 
+    taucs_vec_ipermute(n, v, &x[j * mb], pC->p);
+    if ( Refinement )
+    {        
+        residu_with_prec_for_chol(&A, &x[j * mb], &b[j * mb], res, &norm_res, A_is_upper_triangular, wk);
+        taucs_vec_permute(n, res, v, pC->p);
+        taucs_supernodal_solve_llt(pC->C, res, v);  
+        taucs_vec_ipermute(n, res, v, pC->p);
+        for( i = 0 ; i < n ; i++ )
+            v[i] = x[j * mb + i] - v[i]; 
+        residu_with_prec_for_chol(&A, v, &b[j * mb], res, &norm_res_bis, A_is_upper_triangular, wk);
+        
+        if ( norm_res_bis < norm_res )
+            for( i = 0 ; i < n ; i++ )
+                x[j * mb + i] = v[i];
+    }
+}                       
