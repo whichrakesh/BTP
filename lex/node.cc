@@ -4,69 +4,86 @@
 
 using namespace std;
 
-Empty::Empty(){
-}
-void Empty::print(){
+
+void EmptyStmtAst::print(){
     cout<<"(Empty)";
 }
 
-Block_stmt::Block_stmt(list<StmtAst* >* statement_list){
+ExpStmtAst::ExpStmtAst(ExpAst* exp){
+    this->exp = exp;
+}
+
+void ExpStmtAst::print(){
+    exp->print();
+}
+
+BlockStmtAst::BlockStmtAst(list<StmtAst* >* statement_list){
     this->statement_list = *statement_list;
 }
-void Block_stmt::print(){
+
+void BlockStmtAst::print(){
     cout<<"(Block\n";
     list<StmtAst*>::iterator it;
     for(it = statement_list.begin(); it != statement_list.end(); it++){
-        (*it)->print();        
+        (*it)->print(); 
     }
     cout<<")\n";
 }
 
-
-Ass::Ass(ExpAst *exp1, ExpAst *exp2){
-    this->exp1=exp1;
-    this->exp2=exp2;
+JumpStmtAst::JumpStmtAst(string stmt_type){
+    this->stmt_type = stmt_type;
 }
-void Ass::print(){
-    cout << "( = ";
-    exp1->print();
-    cout << " "; 
-    exp2->print();
-    cout<<")\n";
+
+void JumpStmtAst::print(){
+    cout<<"(" << stmt_type << ")\n";
 }
 
 
-Return_class::Return_class(ExpAst* exp){
+ReturnStmtAst::ReturnStmtAst(ExpAst* exp){
     this->exp=exp;
 }
-void Return_class::print(){
+void ReturnStmtAst::print(){
     cout<<"(return ";
     exp->print();
     cout<<")\n";
 }
 
 
-If_class::If_class(ExpAst* exp, StmtAst* stmt1, StmtAst* stmt2){
+IfStmtAst::IfStmtAst(ExpAst* exp, StmtAst* stmt1, StmtAst* stmt2){
     this->exp = exp;
     this->stmt1 = stmt1;
     this->stmt2 = stmt2;
 }
-void If_class::print(){
+
+void IfStmtAst::print(){
     cout<<"( if ";
     exp->print();
     cout << " "; 
     stmt1->print();
     cout << " "; 
-    stmt2->print();
+    if(stmt2 != NULL)
+        stmt2->print();
     cout<<" )\n";
 }
 
-
-While_class::While_class(ExpAst* exp, StmtAst* stmt){
+SwitchStmtAst::SwitchStmtAst(ExpAst* exp, StmtAst* stmt){
     this->exp = exp;
     this->stmt = stmt;
 }
-void While_class::print(){
+
+void SwitchStmtAst::print(){
+    cout<<"( Switch ";
+    exp->print();
+    cout << " "; 
+    stmt->print();
+    cout<<" )\n";
+}
+
+WhileStmtAst::WhileStmtAst(ExpAst* exp, StmtAst* stmt){
+    this->exp = exp;
+    this->stmt = stmt;
+}
+void WhileStmtAst::print(){
     cout<<"( while ";
     exp->print();
     cout << " "; 
@@ -75,33 +92,34 @@ void While_class::print(){
 }
 
 
-For_class::For_class(ExpAst* exp1, ExpAst* exp2, ExpAst* exp3, StmtAst* stmt){
-    this->exp1 = exp1;
-    this->exp2 = exp2;
+ForStmtAst::ForStmtAst(StmtAst* stmt1, StmtAst* stmt2, ExpAst* exp3, StmtAst* body_stmt){
+    this->stmt1 = stmt1;
+    this->stmt2 = stmt2;
     this->exp3 = exp3;
-    this->stmt = stmt;
+    this->body_stmt = body_stmt;
 }
-void For_class::print(){
+void ForStmtAst::print(){
     cout<<"(for ";
-    exp1->print();
+    stmt1->print();
     cout << " "; 
-    exp2->print();
+    stmt2->print();
     cout << " "; 
-    exp3->print();
+    if(exp3 != NULL)
+        exp3->print();
     cout << " "; 
-    stmt->print();
+    body_stmt->print();
     cout<<" )";
 }
 
 
-Binary_op::Binary_op(string b_op, ExpAst* exp1, ExpAst* exp2){
+BinaryOpAst::BinaryOpAst(string b_op, ExpAst* exp1, ExpAst* exp2){  
     this->b_op = b_op;
     this->exp1 = exp1;
     this->exp2 = exp2;
 }
-void Binary_op::print(){
-    cout<<"( " << b_op;
-    cout << " ";    
+
+void BinaryOpAst::print(){
+    cout<<"( " << b_op << " ";
     exp1->print();
     cout << " ";
     exp2->print();
@@ -109,24 +127,30 @@ void Binary_op::print(){
 }
 
 
-Unary_op::Unary_op(string u_op, ExpAst* exp){
+UnaryOpAst::UnaryOpAst(string u_op, ExpAst* exp){
     this->u_op = u_op;
     this->exp = exp;
 }
-void Unary_op::print(){
+void UnaryOpAst::print(){
     cout<<"( "<< u_op;
     exp->print();
     cout << " )";
 }
 
-
-Fun_call::Fun_call(list<ExpAst* >* expression_list){
+FunCallExpAst::FunCallExpAst(ExpAst* function, list<ExpAst* >* expression_list){
+    this->function = function;
     this->expression_list = *expression_list;
 }
 
-void Fun_call::print(){
+FunCallExpAst::FunCallExpAst(ExpAst* function){
+    this->function = function;
+    this->expression_list = list<ExpAst*>();
+}
+
+void FunCallExpAst::print(){
     list<ExpAst*>::iterator it;
-    cout << "( Fun_call";
+    cout << "(FunCallExpAst " ;
+    function->print();
     for(it = expression_list.begin(); it != expression_list.end(); it++){
         (*it)->print();
         cout<<" ";
@@ -134,30 +158,57 @@ void Fun_call::print(){
     cout << ")";
 }
 
+ConditionalExpAst::ConditionalExpAst(ExpAst *exp1, ExpAst *exp2, ExpAst *exp3){
+    this->exp1 = exp1;
+    this->exp2 = exp2;
+    this->exp3 = exp3;
+}
 
-Float_const::Float_const(float value){
+void ConditionalExpAst::print(){
+    cout << "(Conditional ";
+    exp1->print();
+    exp2->print();
+    exp3->print();
+    cout << " )\n" ;    
+}
+
+
+DataMemberAst::DataMemberAst(ExpAst* instance, string member_name){
+    this->instance = instance;
+    this->member_name = member_name;
+}
+
+void DataMemberAst::print(){
+    cout << "(DataMember ";
+    instance->print();
+    cout << member_name << ")\n" ;    
+}
+
+PointerDataMemberAst::PointerDataMemberAst(ExpAst* exp, string member_name){
+    this->instance_pointer = exp;
+    this->member_name = member_name;
+}
+
+void PointerDataMemberAst::print(){
+    cout << "(PointerDataMember ";
+    instance_pointer->print();
+    cout << member_name  << ")\n";    
+}
+
+Const::Const(float value){
     this->value = value;
 }
-void Float_const::print(){
+void Const::print(){
     cout<<"( FloatConst "<<value<<" )";
 }
 
-
-Int_const::Int_const(int value){
+StringConst::StringConst(string value){
     this->value = value;
 }
-void Int_const::print(){
-    cout<<"( IntConst "<<value<<" )";
-}
 
-
-String_const::String_const(string value){
-    this->value = value;
-}
-void String_const::print(){
+void StringConst::print(){
     cout<<"( StringLiteral \""<<value<<"\" )";
 }
-
 
 Identifier::Identifier(string value){
     this->value = value;
@@ -166,44 +217,15 @@ void Identifier::print(){
     cout<<"(Id: "<<value<<" )";
 }
 
-
-
-IdentifierArray::IdentifierArray(string value){
-    this->value = value;
-}
-void IdentifierArray::print(){
-    cout<<"( ArrayString "<<value << " )";
-}
-
-
-Index::Index(Arrayref* array_ref, ExpAst* exp){
+ArrayIndexAst::ArrayIndexAst(ExpAst* array_ref, ExpAst* exp){
     this->array_ref = array_ref;
-    this->exp = exp;
+    this->index_exp = exp;
 }
-void Index::print(){
-    cout << "( Index ";
+
+void ArrayIndexAst::print(){
+    cout << "( ArrayIndex ";
     array_ref->print();
     cout << " ";
-    exp->print();
+    index_exp->print();
     cout<<" )";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,0 +1,123 @@
+filename for_count for_with_if_count for_with_switch_count for_with_array_references_count for_with_function_calls_count nested_for_count while_count while_with_if_count while_with_switch_count while_with_array_references_count while_with_function_calls_count stmts_inside_loop total_stmts
+/src/test_imopv.c 4 0 0 0 0 1 0 0 0 0 0 5 43
+/src/test_mathop.c 0 0 0 0 0 0 0 0 0 0 0 0 5
+/src/test_kmeans.c 1 0 0 0 0 1 0 0 0 0 0 3 35
+/src/test_nan.c 0 0 0 0 0 0 0 0 0 0 0 0 9
+/src/test_liop.c 1 0 0 1 0 0 0 0 0 0 0 1 9
+/src/test_rand.c 2 2 0 0 0 0 0 0 0 0 0 4 12
+/src/test_mathop_abs.c 2 0 0 2 0 0 2 0 0 0 0 6 23
+/src/test_gmm.c 6 2 0 0 0 6 0 0 0 0 0 33 146
+/src/mser.c 0 0 0 0 0 0 2 2 1 1 0 173 216
+/src/test_host.c 0 0 0 0 0 0 0 0 0 0 0 0 5
+/src/test_svd2.c 0 0 0 0 0 0 0 0 0 0 0 0 47
+/src/test_getopt_long.c 1 0 0 0 0 0 1 0 1 0 0 16 23
+/src/test_stringop.c 0 0 0 0 0 0 0 0 0 0 0 0 67
+/src/test_vec_comp.c 1 0 0 0 0 0 0 0 0 0 0 2 31
+/src/test_heap-def.c 10 0 0 4 0 0 0 0 0 0 0 14 52
+/src/sift.c 1 1 0 0 0 1 2 2 2 1 0 243 317
+/src/test_qsort-def.c 2 0 0 0 0 0 0 0 0 0 0 0 7
+/src/test_threads.c 6 0 0 2 0 0 0 0 0 0 0 9 30
+/src/aib.c 2 0 0 0 0 1 0 0 0 0 0 4 20
+/src/test_sqrti.c 2 2 0 0 2 0 0 0 0 0 0 10 12
+/src/test_gauss_elimination.c 1 0 0 1 0 0 0 0 0 0 0 1 10
+/vl/homkermap.c 4 0 0 1 0 0 2 1 0 1 0 18 133
+/vl/generic.c 1 0 0 0 0 0 2 1 0 0 1 5 220
+/vl/stringop.c 3 2 0 0 0 0 8 8 0 3 0 25 70
+/vl/imopv_sse2.c 0 0 0 0 0 0 2 2 0 1 0 89 108
+/vl/hog.c 10 5 2 4 0 6 0 0 0 0 0 256 361
+/vl/liop.c 7 3 0 6 1 4 1 0 0 0 0 61 144
+/vl/pgm.c 5 0 0 0 0 0 2 0 2 0 2 22 147
+/vl/lbp.c 4 2 0 1 0 3 0 0 0 0 0 46 67
+/vl/host.c 0 0 0 0 0 0 2 2 0 0 0 8 58
+/vl/array.c 1 0 0 1 0 0 0 0 0 0 0 1 37
+/vl/random.c 6 2 0 3 0 0 0 0 0 0 0 17 50
+/vl/mathop_sse2.c 0 0 0 0 0 0 30 2 0 0 10 206 284
+/vl/covdet.c 34 15 2 21 4 13 1 1 0 1 0 388 953
+/vl/ikmeans.c 1 1 0 1 0 1 0 0 0 0 0 6 43
+/vl/gmm.c 20 11 1 3 1 13 0 0 0 0 0 171 430
+/vl/imopv.c 8 1 0 2 0 2 6 2 0 5 0 155 289
+/vl/hikmeans.c 5 4 0 2 0 0 0 0 0 0 0 20 69
+/vl/fisher.c 6 3 0 0 0 3 0 0 0 0 0 36 67
+/vl/mathop_avx.c 0 0 0 0 0 0 12 0 0 0 4 87 121
+/vl/mser.c 15 8 0 1 0 3 3 3 0 1 0 149 265
+/vl/getopt_long.c 1 1 0 1 0 0 1 0 0 0 0 18 83
+/vl/slic.c 5 3 0 1 0 4 0 0 0 0 0 95 135
+/vl/sift.c 23 7 0 5 0 7 2 0 0 2 0 165 523
+/vl/svmdataset.c 0 0 0 0 0 0 4 0 0 0 0 10 97
+/vl/kmeans.c 22 11 2 16 0 12 1 1 0 1 0 265 572
+/vl/quickshift.c 6 3 0 0 0 4 0 0 0 0 0 58 103
+/vl/dsift.c 12 1 0 1 1 3 0 0 0 0 0 68 192
+/vl/mathop.c 5 1 0 0 0 5 11 6 0 0 0 105 308
+/vl/scalespace.c 8 3 0 1 0 2 0 0 0 0 0 35 165
+/vl/svm.c 8 4 0 5 0 1 0 0 0 0 0 84 364
+/vl/aib.c 16 6 0 7 0 5 0 0 0 0 0 61 129
+/vl/rodrigues.c 1 0 0 0 0 0 0 0 0 0 0 1 136
+/vl/vlad.c 4 1 0 1 0 1 0 0 0 0 0 28 50
+/vl/kdtree.c 9 3 3 2 0 3 4 2 0 1 0 96 314
+/toolbox/quickshift/vl_quickshift.c 1 0 0 0 0 0 1 0 1 0 0 4 56
+/toolbox/sift/vl_ubcmatch.c 1 1 0 0 0 1 0 0 0 0 0 19 71
+/toolbox/sift/vl_covdet.c 9 1 1 8 1 1 1 1 1 0 0 133 327
+/toolbox/sift/vl_dsift.c 1 1 0 1 0 1 1 1 1 1 0 52 131
+/toolbox/sift/vl_liop.c 1 0 0 0 0 0 1 1 1 0 0 13 58
+/toolbox/sift/vl_sift.c 2 1 0 1 0 1 2 2 1 0 0 88 169
+/toolbox/sift/vl_siftdescriptor.c 3 1 0 1 0 2 1 1 1 0 0 34 82
+/toolbox/fisher/vl_fisher.c 0 0 0 0 0 0 1 0 1 0 0 6 57
+/toolbox/geometry/vl_rodr.c 1 0 0 0 0 0 0 0 0 0 0 4 27
+/toolbox/geometry/vl_irodr.c 1 0 0 0 0 0 0 0 0 0 0 4 24
+/toolbox/aib/vl_aib.c 9 6 0 4 0 0 1 0 1 0 0 18 85
+/toolbox/aib/vl_aibhist.c 2 2 0 0 0 0 0 0 0 0 0 20 53
+/toolbox/vlad/vl_vlad.c 0 0 0 0 0 0 1 0 1 0 0 7 56
+/toolbox/slic/vl_slic.c 0 0 0 0 0 0 1 1 1 0 0 6 47
+/toolbox/kmeans/vl_kmeans.c 1 0 0 0 0 0 1 1 1 0 0 43 122
+/toolbox/kmeans/vl_ikmeans.c 1 0 0 0 0 0 1 1 1 0 0 12 55
+/toolbox/kmeans/vl_hikmeans.c 2 0 0 0 0 0 1 1 1 0 0 13 79
+/toolbox/kmeans/vl_hikmeanspush.c 2 0 0 1 0 0 1 1 1 0 0 11 78
+/toolbox/kmeans/vl_ikmeanspush.c 1 0 0 0 0 0 1 1 1 0 0 10 49
+/toolbox/gmm/vl_gmm.c 3 2 0 0 0 0 1 1 1 0 0 41 123
+/toolbox/mser/vl_erfill.c 2 0 0 1 0 0 2 2 0 2 0 25 79
+/toolbox/mser/vl_mser.c 4 0 0 0 0 1 1 1 1 0 0 30 121
+/toolbox/misc/vl_svmtrain.c 3 0 0 0 0 0 1 1 1 0 0 36 248
+/toolbox/misc/vl_ihashsum.c 6 3 0 3 0 1 0 0 0 0 0 30 86
+/toolbox/misc/vl_localmax.c 7 0 0 3 0 0 3 2 0 2 0 41 103
+/toolbox/misc/vl_kdtreequery.c 1 1 0 0 0 0 1 1 1 0 0 9 50
+/toolbox/misc/vl_inthist.c 5 3 0 0 0 2 1 1 1 1 0 21 63
+/toolbox/misc/vl_ihashfind.c 6 3 0 4 0 1 0 0 0 0 0 20 57
+/toolbox/misc/vl_alldist2.c 2 2 0 0 0 2 1 0 1 0 0 55 154
+/toolbox/misc/vl_alldist.c 0 0 0 0 0 0 1 0 1 0 0 11 54
+/toolbox/misc/vl_sampleinthist.c 0 0 0 0 0 0 0 0 0 0 0 0 36
+/toolbox/misc/vl_simdctrl.c 0 0 0 0 0 0 0 0 0 0 0 0 9
+/toolbox/misc/vl_threads.c 0 0 0 0 0 0 0 0 0 0 0 0 11
+/toolbox/misc/vl_lbp.c 0 0 0 0 0 0 0 0 0 0 0 0 25
+/toolbox/misc/vl_version.c 0 0 0 0 0 0 1 0 1 0 0 3 21
+/toolbox/misc/vl_twister.c 6 2 0 3 0 0 0 0 0 0 0 7 52
+/toolbox/misc/vl_getpid.c 0 0 0 0 0 0 0 0 0 0 0 0 6
+/toolbox/misc/vl_homkermap.c 3 0 0 0 0 0 1 1 1 0 0 28 68
+/toolbox/misc/vl_binsum.c 0 0 0 0 0 0 0 0 0 0 0 0 23
+/toolbox/misc/vl_cummax.c 2 0 0 1 0 0 0 0 0 0 0 1 26
+/toolbox/misc/vl_binsearch.c 1 1 0 1 0 0 0 0 0 0 0 12 30
+/toolbox/misc/vl_kdtreebuild.c 1 0 0 0 0 0 1 1 1 1 0 18 61
+/toolbox/misc/vl_hog.c 1 0 0 1 0 0 1 1 1 0 0 18 116
+/toolbox/imop/vl_imintegral.c 1 0 1 0 0 0 0 0 0 0 0 5 30
+/toolbox/imop/vl_tpsumx.c 1 0 0 0 0 1 0 0 0 0 0 8 24
+/toolbox/imop/vl_imwbackwardmx.c 2 2 0 2 0 2 1 1 0 0 0 63 102
+/toolbox/imop/vl_imsmooth.c 4 0 0 2 0 0 1 1 1 0 0 37 109
+/toolbox/imop/vl_imdisttf.c 2 0 0 0 0 0 0 0 0 0 0 0 31
+
+
+
+
+total-for: 393
+for-with-if: 140 35%
+for-with-switches: 12 3%
+for-with-array-references: 133 33%
+for-with-function-calls: 10 2%
+total-nested-for: 121 30%
+
+total-while: 135
+while-with-if: 61 45%
+while-with-switches: 33 24%
+while-with-array-references: 25 18%
+while-with-function-calls: 17 12%
+
+total-statements: 11750
+statements-inside-loop: 4395 37%

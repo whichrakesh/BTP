@@ -83,7 +83,7 @@ for(i = 0; i < sizedictionary; i++)
 for(i = 1; i < argc; i++)
     {
         if (strcmp(argv[i], "-nw") == 0)
-        {
+        {.
             setScilabMode(SCILAB_NW);
         }
         else if (strcmp(argv[i], "-nwni") == 0 || strcmp(argv[i], "-nogui") == 0)

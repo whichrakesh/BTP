@@ -1,149 +1,181 @@
 #ifndef Node_h_included
 #define Node_h_included
 
-
+#include <fstream>
 #include <string>
 #include <list>
 #include <map>
-
 using namespace std;
 
+
+/****************************************************************************************/
 //#undef AbstractASTNode
-class abstract_astnode
+class AbstractASTNode
 {
     public:
-    virtual void print () = 0;
-    //virtual std::string generate_code(const symbolTable&) = 0;
-    //virtual basic_types getType() = 0;
-    //virtual bool checkTypeofAST() = 0;
-//    protected:
-//    virtual void setType(basic_types) = 0;
-//    private:
-//    typeExp astnode_type;
+        virtual void print () = 0;
 };
 
 
-class StmtAst: public abstract_astnode{
+class StmtAst: public AbstractASTNode{
 
 };
 
-class ExpAst: public abstract_astnode{
-
-};
-
-class Empty: public StmtAst{
+class ExpAst: public AbstractASTNode{
     public:
-        Empty();
+};
+
+class EmptyStmtAst: public StmtAst{
+    public:
         void print();
 };
 
+class ExpStmtAst: public StmtAst{
+    protected:
+        ExpAst* exp;
+    public:
+        ExpStmtAst(ExpAst* exp);
+        void print();
+};
 
-class Block_stmt: public StmtAst{
+class BlockStmtAst: public StmtAst{
     protected:
         list<StmtAst*> statement_list;
 
     public:
-        Block_stmt(list<StmtAst*>* statement_list);
+        BlockStmtAst(list<StmtAst*>* statement_list);
         void print();
 };
 
-class Ass: public StmtAst{
+class JumpStmtAst: public StmtAst{
     protected:
-        ExpAst *exp1, *exp2;
-
+        string stmt_type;
     public:
-        Ass(ExpAst *exp1, ExpAst *exp2);
-        void print();
+        JumpStmtAst(string stmt_type);
+        void print();    
 };
 
-class Return_class: public StmtAst{
+class ReturnStmtAst: public StmtAst{
     protected:
         ExpAst *exp;
 
     public:
-        Return_class(ExpAst *exp);
+        ReturnStmtAst(ExpAst *exp);
         void print();
 };
 
-class If_class: public StmtAst{
+class IfStmtAst: public StmtAst{
     protected:
         ExpAst *exp;
         StmtAst *stmt1,*stmt2;
 
     public:
-        If_class( ExpAst *exp, StmtAst *stmt1,StmtAst *stmt2);
+        IfStmtAst( ExpAst *exp, StmtAst *stmt1,StmtAst *stmt2);
         void print();
 };
 
-class While_class: public StmtAst{
+class SwitchStmtAst: public StmtAst{
     protected:
         ExpAst *exp;
         StmtAst *stmt;
 
     public:
-        While_class(ExpAst *exp,StmtAst *stmt);
+        SwitchStmtAst( ExpAst *exp, StmtAst *stmt);
         void print();
 };
 
-class For_class: public StmtAst{
+class WhileStmtAst: public StmtAst{
     protected:
-        ExpAst *exp1,*exp2,*exp3;
+        ExpAst *exp;
         StmtAst *stmt;
 
     public:
-        For_class(ExpAst *exp1,ExpAst *exp2,ExpAst *exp3, StmtAst *stmt);
+        WhileStmtAst(ExpAst *exp,StmtAst *stmt);
         void print();
 };
 
-class Binary_op: public ExpAst{
+class ForStmtAst: public StmtAst{
+    protected:
+        StmtAst *stmt1, *stmt2;
+        ExpAst *exp3;
+        StmtAst *body_stmt;
+
+    public:
+        ForStmtAst(StmtAst *stmt1, StmtAst *stmt2, ExpAst *exp3, StmtAst *body_stmt);
+        void print();
+};
+
+
+class BinaryOpAst: public ExpAst{
     protected:
         string b_op;
         ExpAst *exp1,*exp2;
 
     public:
-        Binary_op (string b_op, ExpAst* exp1, ExpAst* exp2);
+        BinaryOpAst (string b_op, ExpAst* exp1, ExpAst* exp2);
         void print();
 };
 
-class Unary_op: public ExpAst{
+class UnaryOpAst: public ExpAst{
     protected:
         string u_op;
         ExpAst *exp;
 
     public:
-        Unary_op(string u_op, ExpAst *exp);
+        UnaryOpAst(string u_op, ExpAst *exp);
         void print();
 };
 
-class Fun_call: public ExpAst{
+class FunCallExpAst: public ExpAst{
     protected:
+        ExpAst *function;
         list<ExpAst*> expression_list;
     public:
-        Fun_call(list<ExpAst*>* expression_list);
+        FunCallExpAst(ExpAst* function, list<ExpAst*>* expression_list);
+        FunCallExpAst(ExpAst* function);
         void print();
 };
 
-class Float_const: public ExpAst{
+class ConditionalExpAst : public ExpAst{
+    protected:
+        ExpAst *exp1, *exp2, *exp3;
+    public: 
+        ConditionalExpAst(ExpAst *exp1, ExpAst *exp2, ExpAst *exp3 );
+        void print();  
+};
+
+class DataMemberAst: public ExpAst{
+    protected:
+        ExpAst *instance;
+        string member_name;
+    public:
+        DataMemberAst(ExpAst* instance, string member_name);
+        void print();
+};
+
+class PointerDataMemberAst: public ExpAst{
+    protected:
+        ExpAst* instance_pointer;
+        string member_name;
+    public:
+        PointerDataMemberAst(ExpAst* exp, string member_name);
+        void print();
+};
+
+class Const: public ExpAst{
     protected:
         float value;
     public:
-        Float_const(float value);
+        Const(float value);
         void print();
 };
 
-class Int_const: public ExpAst{
-    protected:
-        int value;
-    public:
-        Int_const(int value);
-        void print();
-};
 
-class String_const: public ExpAst{
+class StringConst: public ExpAst{
     protected:
         string value;
     public:
-        String_const(string value);
+        StringConst(string value);
         void print();
 };
 
@@ -155,27 +187,15 @@ class Identifier: public ExpAst{
         void print();
 };
 
-class Arrayref: public ExpAst{
+
+class ArrayIndexAst: public ExpAst{
     protected:
-
-};
-
-
-class IdentifierArray: public Arrayref{
-    protected:
-        string value;
+        ExpAst *array_ref;
+        ExpAst *index_exp;
     public:
-        IdentifierArray(string value);
+        ArrayIndexAst(ExpAst *array_ref, ExpAst *exp);
         void print();
 };
 
-class Index: public Arrayref{
-    protected:
-        Arrayref *array_ref;
-        ExpAst *exp;
-    public:
-        Index(Arrayref *array_ref, ExpAst *exp);
-        void print();
-};
 #endif
 

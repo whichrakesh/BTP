@@ -26,6 +26,14 @@ Potential vectorisation inhibitors:
 	--Function calls with potential side effect
 		--function pointers
 		--functions with array indices as parameter
+
+############################################################################################
+TODO---
+
+Extract and Dump every array references to a map
+Extract loop info
+Extrace array declaration information
+categorize the types of array references
 	
 ############################################################################################
 
