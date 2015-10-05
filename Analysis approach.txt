@@ -30,10 +30,12 @@ Potential vectorisation inhibitors:
 ############################################################################################
 TODO---
 
-Extract and Dump every array references to a map
-Extract loop info
-Extrace array declaration information
+✓Extract and Dump every array references to a map
+✓Extract loop info
+Extract array declaration information
 categorize the types of array references
+
+Extract read or write information for the array
 	
 ############################################################################################
 

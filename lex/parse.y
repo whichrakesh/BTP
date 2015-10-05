@@ -5,7 +5,7 @@
 %polymorphic num: int; fl: float; str: string; stmt: StmtAst*; stmts: list<StmtAst*>*; exp: ExpAst*; exps: list<ExpAst*>*;
 
 %token SIZEOF
-%token <str> IDENTIFIER STRING_LITERAL 
+%token <str> IDENTIFIER STRING_LITERAL
 %token <fl> CONSTANT
 %token <str> PTR_OP INC_OP DEC_OP LEFT_OP RIGHT_OP LE_OP GE_OP EQ_OP NE_OP
 %token <str> AND_OP OR_OP MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN ADD_ASSIGN
@@ -23,7 +23,7 @@
 %type <exp> shift_expression relational_expression equality_expression and_expression exclusive_or_expression inclusive_or_expression
 %type <exp> logical_and_expression logical_or_expression conditional_expression assignment_expression expression constant_expression
 %type <exps> argument_expression_list
-%type <str> unary_operator assignment_operator
+%type <str> unary_operator assignment_operator multiline_string
 %type <stmt> statement labeled_statement compound_statement  expression_statement
 %type <stmt> selection_statement iteration_statement jump_statement
 %type <stmts> statement_list
@@ -40,13 +40,24 @@ primary_expression
 	{
 		$$ = new Const($1);
 	}
-	| STRING_LITERAL
+	| multiline_string
 	{
 		$$ = new StringConst($1);
 	}
 	| '(' expression ')'
 	{
 		$$ = $2;
+	}
+	;
+
+multiline_string
+	: STRING_LITERAL
+	{
+		$$ = $1;
+	}
+	| multiline_string STRING_LITERAL
+	{
+		$$ = $1 + $2;
 	}
 	;
 
@@ -295,11 +306,15 @@ constant_expression
 
 //------------------------------------------------------------------------------------------------------------------
 
-declaration
+/*declaration
 	: declaration_specifiers ';'
 	| declaration_specifiers init_declarator_list ';'
-	;
+	;*/
 
+declaration
+	: type_specifier ';'
+	| type_specifier init_declarator_list ';'
+	;
 declaration_specifiers
 	: storage_class_specifier
 	| storage_class_specifier declaration_specifiers

@@ -1,8 +1,8 @@
 import os,re
-project_path = '/home/rakesh/Dropbox/Study/Sem-7/BTP-I/quantlib-master'
+project_path = '/home/rakesh/quantlib-master'
 for root, dirs, files in os.walk(project_path):
     for name in files:
-		if(name.endswith('.cpp')):			
+		if(name.endswith('.c')):			
 			filename = os.path.join(root,name)
 			# print filename
 			f = open(filename,'r')

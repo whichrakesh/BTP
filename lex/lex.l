@@ -55,7 +55,7 @@ L?'(\\.|[^\\'])+'	{  Parser::d_val__ = (float)atof(matched().c_str()); return Pa
 {D}*"."{D}+({E})?{FS}?	{  Parser::d_val__ = (float)atof(matched().c_str()); return Parser::CONSTANT; }
 {D}+"."{D}*({E})?{FS}?	{  Parser::d_val__ = (float)atof(matched().c_str()); return Parser::CONSTANT; }
 
-L?\"(\\.|[^\\"])*\"	{  Parser::d_val__ = std::string(matched()); }
+L?\"(\\.|[^\\"])*\"	{  Parser::d_val__ = std::string(matched()); return Parser::STRING_LITERAL;}
 
 "..."			{  Parser::d_val__ = std::string(matched()); return Parser::ELLIPSIS;}
 ">>="			{ Parser::d_val__ = std::string(matched());  return Parser::RIGHT_ASSIGN; }
@@ -105,7 +105,7 @@ L?\"(\\.|[^\\"])*\"	{  Parser::d_val__ = std::string(matched()); }
 "?"			{ Parser::d_val__ = std::string(matched());  return '?'; }
 
 [ \t\v\n\f]		{  }
-'^'+			{ std::cout << "endfor";}
+'^'+.+			{ std::cout << "endfor";}
 .			{ /* ignore bad characters */ }
 %%
 
