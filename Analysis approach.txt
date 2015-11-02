@@ -36,7 +36,9 @@ Extract array declaration information
 categorize the types of array references
 
 Extract read or write information for the array
-	
+Extract line numbers
+scalars to be done later
+skip pointers	
 ############################################################################################
 
 for(i = 0; i < m1 * n1; i++) // m1 and n1 can be variable

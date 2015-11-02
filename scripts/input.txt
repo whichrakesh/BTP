@@ -1,0 +1,17 @@
+
+for(l = 1; l <= *m; ++l){\
+          DY[l] = DX[l];DK[l] = 1;\
+      for(k = 1; k < *n; ++k) {\
+            if (DX[l+k*ix] < DY[l]) {\
+              DY[l] = DX[l+k*ix];DK[l] = k+1;}}}
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+for(k = 0; k < *n; ++k){\
+          kk = k*ix;\
+          DY[1+k*iy] = DX[1+kk];DK[1+k*iy] = 1;\
+      for(l = 2; l <= *m; ++l) {\
+            if (DX[l+kk] < DY[1+k*iy]) {\
+              DY[1+k*iy] = DX[l+kk];DK[1+k*iy] = l;}}}
